@@ -4,7 +4,7 @@ import Filter from "./Filter";
 import Item from "./Item";
 
 
-function ShoppingList({ items, onSetItems, onFormChange }) {
+function ShoppingList({ items, onItemFormSubmit, onFormChange }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedSearch, setSelectedSearch]=useState("");
 
@@ -32,7 +32,7 @@ function ShoppingList({ items, onSetItems, onFormChange }) {
 
   return (
     <div className="ShoppingList">
-      <ItemForm onSetItems={onSetItems} onFormChange={onFormChange}/>
+      <ItemForm onItemFormSubmit={onItemFormSubmit} onFormChange={onFormChange}/>
       <Filter onCategoryChange={handleCategoryChange} onSearchChange={handleSearchChange} />
       <ul className="Items">
         {itemsToDisplay.map((item) => (

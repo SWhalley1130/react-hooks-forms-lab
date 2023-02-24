@@ -1,10 +1,10 @@
 import React from "react";
 
 
-function ItemForm({onSetItems, onFormChange}) {
+function ItemForm({onItemFormSubmit, onFormChange}) {
   
   return (
-    <form onSubmit={onSetItems} onChange={onFormChange} className="NewItem">
+    <form onSubmit={onItemFormSubmit} onChange={onFormChange} className="NewItem">
       <label>
         Name:
         <input type="text" name="name" />

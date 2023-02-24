@@ -43,7 +43,7 @@ function App() {
   return (
     <div className={"App " + (isDarkMode ? "dark" : "light")}>
       <Header isDarkMode={isDarkMode} onDarkModeClick={handleDarkModeClick} />
-      <ShoppingList onFormChange={handleFormChange} onSetItems={handleNewItem} items={items} />
+      <ShoppingList onFormChange={handleFormChange} onItemFormSubmit={handleNewItem} items={items} />
     </div>
   );
 }
