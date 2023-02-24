@@ -24,12 +24,11 @@ function ShoppingList({ items, onSetItems }) {
     const itemCategory = event.target.category.value
 
     setformData({
-      ...formData,
       id: uuid(),
       name: itemName,
       category: itemCategory
     })
-
+    console.log(formData)
     onSetItems(formData);
 
   }
