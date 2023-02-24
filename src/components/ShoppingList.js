@@ -2,10 +2,37 @@ import React, { useState } from "react";
 import ItemForm from "./ItemForm";
 import Filter from "./Filter";
 import Item from "./Item";
+import { v4 as uuid } from "uuid";
+import { version } from "react/cjs/react.production.min";
 
-function ShoppingList({ items }) {
+function ShoppingList({ items, onSetItems }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedSearch, setSelectedSearch]=useState("");
+  const [formData, setformData]=useState(
+    {
+      id:uuid(),
+      name: "",
+      category: 'Produce'
+    }
+  );
+
+
+  function handleItemFormSubmit(event)
+  {
+    event.preventDefault();
+    const itemName = event.target.name.value;
+    const itemCategory = event.target.category.value
+
+    setformData({
+      ...formData,
+      id: uuid(),
+      name: itemName,
+      category: itemCategory
+    })
+
+    onSetItems(formData);
+
+  }
 
   function handleCategoryChange(event) {
     setSelectedCategory(event.target.value);
@@ -13,7 +40,6 @@ function ShoppingList({ items }) {
 
   function handleSearchChange(event)
   {
-    console.log(event.target.value);
     setSelectedSearch(event.target.value);
   }
 
@@ -32,7 +58,7 @@ function ShoppingList({ items }) {
 
   return (
     <div className="ShoppingList">
-      <ItemForm />
+      <ItemForm onItemFormSubmit={handleItemFormSubmit}/>
       <Filter onCategoryChange={handleCategoryChange} onSearchChange={handleSearchChange} />
       <ul className="Items">
         {itemsToDisplay.map((item) => (
