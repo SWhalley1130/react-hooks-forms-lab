@@ -2,14 +2,38 @@ import React, { useState } from "react";
 import ShoppingList from "./ShoppingList";
 import Header from "./Header";
 import itemData from "../data/items";
+import { v4 as uuid } from "uuid";
 
 function App() {
   const [items, setItems] = useState(itemData);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [formData, setformData]=useState(
+    {
+      id:uuid(),
+      name: "",
+      category: 'Produce'
+    }
+  );
+
+  console.log(items)
+  console.log(formData)
+
+  function handleFormChange(event)
+  {
+    let key=event.target.name;
+    let value=event.target.value
+    setformData(
+    {
+      ...formData,
+      [key]:value,
+      id:uuid()
+    })
+  }
 
   function handleNewItem(event)
   {
-    setItems([...items, event])
+    event.preventDefault();
+    setItems([...items, formData])
   }
   
   function handleDarkModeClick() {
@@ -19,7 +43,7 @@ function App() {
   return (
     <div className={"App " + (isDarkMode ? "dark" : "light")}>
       <Header isDarkMode={isDarkMode} onDarkModeClick={handleDarkModeClick} />
-      <ShoppingList onSetItems={handleNewItem} items={items} />
+      <ShoppingList onFormChange={handleFormChange} onSetItems={handleNewItem} items={items} />
     </div>
   );
 }

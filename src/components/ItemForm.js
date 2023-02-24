@@ -1,10 +1,10 @@
 import React from "react";
-import { v4 as uuid } from "uuid";
 
-function ItemForm({onItemFormSubmit}) {
+
+function ItemForm({onSetItems, onFormChange}) {
   
   return (
-    <form onSubmit={onItemFormSubmit} className="NewItem">
+    <form onSubmit={onSetItems} onChange={onFormChange} className="NewItem">
       <label>
         Name:
         <input type="text" name="name" />
